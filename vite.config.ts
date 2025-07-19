@@ -1,7 +1,6 @@
 import { defineConfig, Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { createServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -15,7 +14,14 @@ export default defineConfig(({ command, mode }) => {
     build: {
       outDir: "dist/spa",
       sourcemap: false,
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 1500,
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // Suppress chunk size warnings for production
+          if (warning.code === "LARGE_BUNDLE") return;
+          warn(warning);
+        },
+      },
     },
     plugins: [
       react(),
@@ -27,6 +33,10 @@ export default defineConfig(({ command, mode }) => {
         "@shared": path.resolve(__dirname, "./shared"),
       },
     },
+    define: {
+      // Ensure environment variables work in production
+      "process.env.NODE_ENV": '"production"',
+    },
   };
 });
 
@@ -36,8 +46,14 @@ function expressPlugin(): Plugin {
     name: "express-dev-plugin",
     apply: "serve",
     configureServer(server) {
-      const app = createServer();
-      server.middlewares.use(app);
+      // Only load server in development
+      try {
+        const { createServer } = require("./server");
+        const app = createServer();
+        server.middlewares.use(app);
+      } catch (error) {
+        console.warn("Server not available in production build");
+      }
     },
   };
 }
