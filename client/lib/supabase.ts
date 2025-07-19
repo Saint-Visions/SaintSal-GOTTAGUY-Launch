@@ -8,26 +8,35 @@ const supabaseAnonKey =
   import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // Create a mock client for development if env vars are missing
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn(
-    "Missing Supabase environment variables. Using mock client for development.",
-  );
+const createSupabaseClient = () => {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn(
+      "Missing Supabase environment variables. Using mock client for development.",
+    );
 
-  export const supabase = {
-    auth: {
-      getUser: () => Promise.resolve({ data: { user: null }, error: null }),
-      signIn: () => Promise.resolve({ data: { user: null }, error: null }),
-      signUp: () => Promise.resolve({ data: { user: null }, error: null }),
-      signOut: () => Promise.resolve({ error: null }),
-      onAuthStateChange: () => ({ data: { subscription: null } }),
-    },
-    from: () => ({
-      select: () => Promise.resolve({ data: [], error: null }),
-      insert: () => Promise.resolve({ data: null, error: null }),
-      update: () => Promise.resolve({ data: null, error: null }),
-      delete: () => Promise.resolve({ data: null, error: null }),
-    }),
-  } as any;
-} else {
-  export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-}
+    return {
+      auth: {
+        getUser: () => Promise.resolve({ data: { user: null }, error: null }),
+        signIn: () => Promise.resolve({ data: { user: null }, error: null }),
+        signUp: () => Promise.resolve({ data: { user: null }, error: null }),
+        signOut: () => Promise.resolve({ error: null }),
+        onAuthStateChange: () => ({ data: { subscription: null } }),
+      },
+      from: () => ({
+        select: () => Promise.resolve({ data: [], error: null }),
+        insert: () => Promise.resolve({ data: null, error: null }),
+        update: () => Promise.resolve({ data: null, error: null }),
+        delete: () => Promise.resolve({ data: null, error: null }),
+        eq: () => ({
+          eq: () => ({
+            single: () => Promise.resolve({ data: null, error: null }),
+          }),
+        }),
+      }),
+    } as any;
+  } else {
+    return createClient(supabaseUrl, supabaseAnonKey);
+  }
+};
+
+export const supabase = createSupabaseClient();
