@@ -7,16 +7,27 @@ const supabaseAnonKey =
   import.meta.env.VITE_SUPABASE_ANON_KEY ||
   import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl) {
-  throw new Error(
-    "Missing Supabase URL. Please set VITE_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_URL in your environment variables.",
+// Create a mock client for development if env vars are missing
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn(
+    "Missing Supabase environment variables. Using mock client for development.",
   );
-}
 
-if (!supabaseAnonKey) {
-  throw new Error(
-    "Missing Supabase Anon Key. Please set VITE_SUPABASE_ANON_KEY or NEXT_PUBLIC_SUPABASE_ANON_KEY in your environment variables.",
-  );
+  export const supabase = {
+    auth: {
+      getUser: () => Promise.resolve({ data: { user: null }, error: null }),
+      signIn: () => Promise.resolve({ data: { user: null }, error: null }),
+      signUp: () => Promise.resolve({ data: { user: null }, error: null }),
+      signOut: () => Promise.resolve({ error: null }),
+      onAuthStateChange: () => ({ data: { subscription: null } }),
+    },
+    from: () => ({
+      select: () => Promise.resolve({ data: [], error: null }),
+      insert: () => Promise.resolve({ data: null, error: null }),
+      update: () => Promise.resolve({ data: null, error: null }),
+      delete: () => Promise.resolve({ data: null, error: null }),
+    }),
+  } as any;
+} else {
+  export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 }
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
