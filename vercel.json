@@ -2,22 +2,8 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/spa",
   "installCommand": "npm install --legacy-peer-deps",
-<<<<<<< HEAD
   "rewrites": [
     {
-=======
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
->>>>>>> face928b34fa190d0dcee9a7249cf627616ae623
       "source": "/(.*)",
       "destination": "/index.html"
     }
