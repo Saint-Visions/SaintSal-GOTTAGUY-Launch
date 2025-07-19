@@ -346,10 +346,15 @@ export async function getUserGhlLocationId(
   try {
     // Example implementation (adjust based on your actual database)
     const { createClient } = await import("@supabase/supabase-js");
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    );
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.warn("Missing Supabase environment variables for GHL API");
+      return { leadSources: [], opportunityStages: [] };
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     const { data } = await supabase
       .from("workspaces")

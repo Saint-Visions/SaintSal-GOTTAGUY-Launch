@@ -4,10 +4,17 @@ import { createClient } from "@supabase/supabase-js";
 const router = express.Router();
 
 // Initialize Supabase client for webhook handling
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-);
+const getSupabaseClient = () => {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    console.warn("Missing Supabase environment variables for webhook");
+    return null;
+  }
+
+  return createClient(supabaseUrl, supabaseServiceKey);
+};
 
 // GHL Webhook handler for two-way sync
 router.post("/ghl-webhook", async (req, res) => {
@@ -30,14 +37,17 @@ router.post("/ghl-webhook", async (req, res) => {
     const accountId = req.query.acct || locationId;
 
     // Log the event for debugging
-    await supabase.from("crm_events").insert({
-      event_type: type,
-      location_id: locationId,
-      account_id: accountId,
-      event_data: data,
-      raw_payload: req.body,
-      created_at: new Date().toISOString(),
-    });
+    const supabase = getSupabaseClient();
+    if (supabase) {
+      await supabase.from("crm_events").insert({
+        event_type: type,
+        location_id: locationId,
+        account_id: accountId,
+        event_data: data,
+        raw_payload: req.body,
+        created_at: new Date().toISOString(),
+      });
+    }
 
     // Process specific event types
     switch (type) {
@@ -89,6 +99,9 @@ async function handleContactCreated(contactData: any, locationId: string) {
   try {
     console.log("👤 New contact created:", contactData);
 
+    const supabase = getSupabaseClient();
+    if (!supabase) return;
+
     // Find the user workspace associated with this GHL location
     const { data: workspace } = await supabase
       .from("workspaces")
@@ -122,6 +135,9 @@ async function handleContactUpdated(contactData: any, locationId: string) {
   try {
     console.log("📝 Contact updated:", contactData);
 
+    const supabase = getSupabaseClient();
+    if (!supabase) return;
+
     // Update existing contact in our database
     await supabase
       .from("contacts")
@@ -147,6 +163,9 @@ async function handleOpportunityCreated(
 ) {
   try {
     console.log("💰 New opportunity created:", opportunityData);
+
+    const supabase = getSupabaseClient();
+    if (!supabase) return;
 
     const { data: workspace } = await supabase
       .from("workspaces")
@@ -179,6 +198,9 @@ async function handleAppointmentCreated(
 ) {
   try {
     console.log("📅 New appointment created:", appointmentData);
+
+    const supabase = getSupabaseClient();
+    if (!supabase) return;
 
     const { data: workspace } = await supabase
       .from("workspaces")
