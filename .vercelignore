@@ -1,0 +1,18 @@
+# Ignore server-side files that shouldn't be deployed as functions
+server/
+api/
+netlify/
+functions/
+*.md
+README.md
+.env.example
+commit_message.txt
+
+# Node modules and build artifacts
+node_modules/
+dist/server/
+.git/
+
+# Development files
+*.log
+.DS_Store
