@@ -52,17 +52,20 @@ export default function Workspace() {
     if (isPartnerTechWorkspace) {
       return {
         name: "PartnerTech.ai",
-        logo: "https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fpartnertech-logo",
+        logo:
+          "https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fpartnertech-logo",
         tagline: "CRM + Automation Suite",
         primaryColor: "#3B82F6", // Blue
         accentColor: "#10B981", // Green
         gradient: "bg-gradient-to-r from-blue-500 to-emerald-500",
-        textGradient: "bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent",
+        textGradient:
+          "bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent",
       };
     }
     return {
       name: "SaintVision AI",
-      logo: "https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fdc36ab3d288a4806bc52f5b6be2d1ad4",
+      logo:
+        "https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fdc36ab3d288a4806bc52f5b6be2d1ad4",
       tagline: "AI Platform",
       primaryColor: "#FFD700", // Gold
       accentColor: "#4F46E5", // Purple
@@ -204,15 +207,15 @@ export default function Workspace() {
   return (
     <div className="min-h-screen bg-charcoal-900 text-white relative overflow-hidden">
       {/* Background Pattern - BEAUTIFUL GOLD CIRCUIT PATTERN */}
-      <div 
+      <div
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: `
             radial-gradient(circle at 25px 25px, rgb(255, 215, 0) 2px, transparent 2px),
             radial-gradient(circle at 75px 75px, rgb(255, 215, 0) 2px, transparent 2px)
           `,
-          backgroundSize: '100px 100px, 100px 100px',
-          backgroundPosition: '0px 0px, 50px 50px'
+          backgroundSize: "100px 100px, 100px 100px",
+          backgroundPosition: "0px 0px, 50px 50px",
         }}
       />
 
@@ -253,15 +256,25 @@ export default function Workspace() {
                 : "brightness(1.3) contrast(1.2) drop-shadow(0 0 12px rgba(255, 215, 0, 0.4))",
               opacity: "0.95",
             }}
-            onError={(e) => {
-              e.currentTarget.src = `https://api.dicebear.com/7.x/initials/svg?seed=${brandConfig.name}&backgroundColor=${isPartnerTechWorkspace ? "3B82F6" : "FFD700"}`;
+            onError={e => {
+              e.currentTarget.src = `https://api.dicebear.com/7.x/initials/svg?seed=${
+                brandConfig.name
+              }&backgroundColor=${
+                isPartnerTechWorkspace ? "3B82F6" : "FFD700"
+              }`;
             }}
           />
           <div>
-            <h1 className={`text-lg md:text-xl font-bold ${brandConfig.textGradient}`}>
+            <h1
+              className={`text-lg md:text-xl font-bold ${brandConfig.textGradient}`}
+            >
               {workspaceName}
             </h1>
-            <p className={`text-xs -mt-1 hidden sm:block ${isPartnerTechWorkspace ? "text-blue-300" : "text-gold-300"}`}>
+            <p
+              className={`text-xs -mt-1 hidden sm:block ${
+                isPartnerTechWorkspace ? "text-blue-300" : "text-gold-300"
+              }`}
+            >
               {brandConfig.tagline} Workspace
             </p>
           </div>
@@ -298,13 +311,29 @@ export default function Workspace() {
       <div className="relative z-40 px-4 md:px-6 py-6 md:py-8">
         <div className="max-w-7xl mx-auto">
           {/* Mobile-First Header - BEAUTIFUL BLUE GRADIENTS */}
-          <div className={`mb-6 md:mb-8 transform transition-all duration-1000 ${isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
+          <div
+            className={`mb-6 md:mb-8 transform transition-all duration-1000 ${
+              isLoaded
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 tracking-tight">
-              <span className={isPartnerTechWorkspace ? "bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent" : "saintvision-gradient-text"}>
+              <span
+                className={
+                  isPartnerTechWorkspace
+                    ? "bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent"
+                    : "saintvision-gradient-text"
+                }
+              >
                 Team
               </span>
               <br />
-              <span className={isPartnerTechWorkspace ? "text-blue-300" : "text-green-300"}>
+              <span
+                className={
+                  isPartnerTechWorkspace ? "text-blue-300" : "text-green-300"
+                }
+              >
                 Workspace
               </span>
             </h1>
@@ -316,16 +345,29 @@ export default function Workspace() {
           </div>
 
           {/* Mobile-Optimized Stats */}
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8 transform transition-all duration-1000 delay-300 ${isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
+          <div
+            className={`grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8 transform transition-all duration-1000 delay-300 ${
+              isLoaded
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             {workspaceStats.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <div key={index} className="glass-morphism p-3 md:p-6 rounded-xl hover:saintvision-glow transition-all">
+                <div
+                  key={index}
+                  className="glass-morphism p-3 md:p-6 rounded-xl hover:saintvision-glow transition-all"
+                >
                   <div className="flex items-center justify-between mb-2 md:mb-3">
                     <Icon className={`w-4 h-4 md:w-6 md:h-6 ${stat.color}`} />
                   </div>
-                  <p className="text-lg md:text-2xl font-bold text-white mb-1">{stat.value}</p>
-                  <p className="text-white/70 text-xs md:text-sm mb-1">{stat.label}</p>
+                  <p className="text-lg md:text-2xl font-bold text-white mb-1">
+                    {stat.value}
+                  </p>
+                  <p className="text-white/70 text-xs md:text-sm mb-1">
+                    {stat.label}
+                  </p>
                   <p className="text-white/50 text-xs">{stat.change}</p>
                 </div>
               );
@@ -333,10 +375,16 @@ export default function Workspace() {
           </div>
 
           {/* Mobile Tab Navigation */}
-          <div className={`mb-6 md:mb-8 transform transition-all duration-1000 delay-500 ${isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
+          <div
+            className={`mb-6 md:mb-8 transform transition-all duration-1000 delay-500 ${
+              isLoaded
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             <div className="glass-morphism p-3 md:p-4 rounded-xl">
               <div className="flex space-x-1 md:space-x-2 overflow-x-auto">
-                {workspaceTabs.map((tab) => {
+                {workspaceTabs.map(tab => {
                   const Icon = tab.icon;
                   return (
                     <Button
@@ -351,7 +399,9 @@ export default function Workspace() {
                     >
                       <Icon className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
                       <span className="hidden sm:inline">{tab.label}</span>
-                      <span className="sm:hidden">{tab.label.split(" ")[0]}</span>
+                      <span className="sm:hidden">
+                        {tab.label.split(" ")[0]}
+                      </span>
                     </Button>
                   );
                 })}
@@ -360,7 +410,13 @@ export default function Workspace() {
           </div>
 
           {/* Tab Content */}
-          <div className={`transform transition-all duration-1000 delay-700 ${isLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
+          <div
+            className={`transform transition-all duration-1000 delay-700 ${
+              isLoaded
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
+            }`}
+          >
             {activeTab === "overview" && (
               <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
                 {/* Main Content */}
@@ -369,8 +425,13 @@ export default function Workspace() {
                   <div className="glass-morphism rounded-xl overflow-hidden">
                     <div className="p-4 md:p-6 border-b border-white/10">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-lg md:text-xl font-bold">Team Members</h3>
-                        <Button size="sm" className="bg-green-500 text-white hover:bg-green-400 saintvision-glow">
+                        <h3 className="text-lg md:text-xl font-bold">
+                          Team Members
+                        </h3>
+                        <Button
+                          size="sm"
+                          className="bg-green-500 text-white hover:bg-green-400 saintvision-glow"
+                        >
                           <UserPlus className="w-4 h-4 mr-2" />
                           Add Member
                         </Button>
@@ -378,22 +439,42 @@ export default function Workspace() {
                     </div>
                     <div className="divide-y divide-white/10">
                       {teamMembers.slice(0, 4).map((member, index) => (
-                        <div key={index} className="p-4 hover:bg-white/5 transition-colors">
+                        <div
+                          key={index}
+                          className="p-4 hover:bg-white/5 transition-colors"
+                        >
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
                               <Avatar className="w-8 h-8 md:w-10 md:h-10">
                                 <AvatarFallback className="bg-gold-500 text-charcoal-900 font-bold text-xs md:text-sm">
-                                  {member.name.split(" ").map((n) => n[0]).join("")}
+                                  {member.name
+                                    .split(" ")
+                                    .map(n => n[0])
+                                    .join("")}
                                 </AvatarFallback>
                               </Avatar>
                               <div>
-                                <p className="font-medium text-sm md:text-base">{member.name}</p>
-                                <p className="text-white/60 text-xs md:text-sm">{member.email}</p>
+                                <p className="font-medium text-sm md:text-base">
+                                  {member.name}
+                                </p>
+                                <p className="text-white/60 text-xs md:text-sm">
+                                  {member.email}
+                                </p>
                               </div>
                             </div>
                             <div className="flex items-center space-x-2">
-                              <Badge className={`${getRoleColor(member.role)} text-xs`}>{member.role}</Badge>
-                              <Button variant="ghost" size="sm" className="text-white/70 hover:text-white p-1">
+                              <Badge
+                                className={`${getRoleColor(
+                                  member.role,
+                                )} text-xs`}
+                              >
+                                {member.role}
+                              </Badge>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-white/70 hover:text-white p-1"
+                              >
                                 <MoreVertical className="w-4 h-4" />
                               </Button>
                             </div>
@@ -405,18 +486,28 @@ export default function Workspace() {
 
                   {/* Usage Analytics */}
                   <div className="glass-morphism p-4 md:p-6 rounded-xl">
-                    <h3 className="text-lg md:text-xl font-bold mb-4 md:mb-6">Usage Analytics</h3>
+                    <h3 className="text-lg md:text-xl font-bold mb-4 md:mb-6">
+                      Usage Analytics
+                    </h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                       <div className="text-center p-4 bg-white/5 rounded-lg">
-                        <p className="text-2xl md:text-3xl font-bold text-blue-300 mb-1">12,847</p>
-                        <p className="text-white/70 text-sm">Total Conversations</p>
+                        <p className="text-2xl md:text-3xl font-bold text-blue-300 mb-1">
+                          12,847
+                        </p>
+                        <p className="text-white/70 text-sm">
+                          Total Conversations
+                        </p>
                       </div>
                       <div className="text-center p-4 bg-white/5 rounded-lg">
-                        <p className="text-2xl md:text-3xl font-bold text-green-300 mb-1">2.4M</p>
+                        <p className="text-2xl md:text-3xl font-bold text-green-300 mb-1">
+                          2.4M
+                        </p>
                         <p className="text-white/70 text-sm">Tokens Used</p>
                       </div>
                       <div className="text-center p-4 bg-white/5 rounded-lg col-span-2 md:col-span-1">
-                        <p className="text-2xl md:text-3xl font-bold text-gold-300 mb-1">94.2%</p>
+                        <p className="text-2xl md:text-3xl font-bold text-gold-300 mb-1">
+                          94.2%
+                        </p>
                         <p className="text-white/70 text-sm">Success Rate</p>
                       </div>
                     </div>
@@ -427,17 +518,28 @@ export default function Workspace() {
                 <div className="lg:col-span-1 space-y-6 md:space-y-8">
                   {/* Recent Activity */}
                   <div className="glass-morphism p-4 md:p-6 rounded-xl">
-                    <h3 className="text-lg font-bold mb-4 md:mb-6">Recent Activity</h3>
+                    <h3 className="text-lg font-bold mb-4 md:mb-6">
+                      Recent Activity
+                    </h3>
                     <div className="space-y-3 md:space-y-4">
                       {recentActivity.map((activity, index) => (
-                        <div key={index} className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg">
+                        <div
+                          key={index}
+                          className="flex items-center space-x-3 p-3 bg-white/5 rounded-lg"
+                        >
                           <div className="w-6 h-6 md:w-8 md:h-8 bg-gold-500/20 rounded-full flex items-center justify-center">
                             <Activity className="w-3 h-3 md:w-4 md:h-4 text-gold-300" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-medium text-sm">{activity.user}</p>
-                            <p className="text-white/70 text-xs truncate">{activity.action}</p>
-                            <p className="text-white/50 text-xs">{activity.time}</p>
+                            <p className="font-medium text-sm">
+                              {activity.user}
+                            </p>
+                            <p className="text-white/70 text-xs truncate">
+                              {activity.action}
+                            </p>
+                            <p className="text-white/50 text-xs">
+                              {activity.time}
+                            </p>
                           </div>
                         </div>
                       ))}
@@ -446,17 +548,25 @@ export default function Workspace() {
 
                   {/* Quick Actions */}
                   <div className="glass-morphism p-4 md:p-6 rounded-xl">
-                    <h3 className="text-lg font-bold mb-4 md:mb-6">Quick Actions</h3>
+                    <h3 className="text-lg font-bold mb-4 md:mb-6">
+                      Quick Actions
+                    </h3>
                     <div className="space-y-3">
                       <Button className="w-full justify-start bg-green-500 text-white hover:bg-green-400 saintvision-glow h-10 md:h-12">
                         <UserPlus className="w-4 h-4 mr-2" />
                         Invite Team Member
                       </Button>
-                      <Button variant="outline" className="w-full justify-start border-gold-400/60 text-gold-200 hover:bg-gold-500/20 hover:text-gold-100 h-10 md:h-12">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start border-gold-400/60 text-gold-200 hover:bg-gold-500/20 hover:text-gold-100 h-10 md:h-12"
+                      >
                         <Download className="w-4 h-4 mr-2" />
                         Export Data
                       </Button>
-                      <Button variant="outline" className="w-full justify-start border-gold-400/60 text-gold-200 hover:bg-gold-500/20 hover:text-gold-100 h-10 md:h-12">
+                      <Button
+                        variant="outline"
+                        className="w-full justify-start border-gold-400/60 text-gold-200 hover:bg-gold-500/20 hover:text-gold-100 h-10 md:h-12"
+                      >
                         <Settings className="w-4 h-4 mr-2" />
                         Workspace Settings
                       </Button>
@@ -467,11 +577,18 @@ export default function Workspace() {
                   <div className="glass-morphism p-4 md:p-6 rounded-xl">
                     <h3 className="text-lg font-bold mb-4">Current Plan</h3>
                     <div className="text-center mb-4">
-                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30 mb-2">Enterprise</Badge>
+                      <Badge className="bg-green-500/20 text-green-300 border-green-500/30 mb-2">
+                        Enterprise
+                      </Badge>
                       <p className="text-2xl font-bold">$497/month</p>
-                      <p className="text-white/70 text-sm">Up to 50 team members</p>
+                      <p className="text-white/70 text-sm">
+                        Up to 50 team members
+                      </p>
                     </div>
-                    <Button variant="outline" className="w-full border-gold-500 text-gold-300 hover:bg-gold-500 hover:text-charcoal-900">
+                    <Button
+                      variant="outline"
+                      className="w-full border-gold-500 text-gold-300 hover:bg-gold-500 hover:text-charcoal-900"
+                    >
                       <ArrowUpRight className="w-4 h-4 mr-2" />
                       Upgrade Plan
                     </Button>
