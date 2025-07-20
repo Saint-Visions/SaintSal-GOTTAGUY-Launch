@@ -175,13 +175,7 @@ export default function Workspace() {
       <div className="absolute inset-0 circuit-pattern opacity-5"></div>
 
       {/* Parallax Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `linear-gradient(135deg, rgba(16, 22, 28, 0.98) 0%, rgba(16, 22, 28, 0.95) 100%), 
-                           url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')`,
-        }}
-      ></div>
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat workspace-parallax-bg"></div>
 
       {/* Mobile-First Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 md:p-6 lg:px-12 border-b border-white/10">
@@ -189,12 +183,7 @@ export default function Workspace() {
           <img
             src="https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fdc36ab3d288a4806bc52f5b6be2d1ad4?format=webp&width=800"
             alt="SaintSal Logo"
-            className="w-10 h-10 md:w-12 md:h-12 object-contain"
-            style={{
-              filter:
-                "brightness(1.3) contrast(1.2) drop-shadow(0 0 12px rgba(255, 215, 0, 0.4))",
-              opacity: "0.95",
-            }}
+            className="w-10 h-10 md:w-12 md:h-12 object-contain saintsal-logo-img"
           />
           <div>
             <h1 className="text-lg md:text-xl font-bold saintvision-gradient-text">
