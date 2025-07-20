@@ -170,11 +170,7 @@ export default function AdminClients() {
 
       {/* Parallax Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `linear-gradient(135deg, rgba(16, 22, 28, 0.98) 0%, rgba(16, 22, 28, 0.95) 100%), 
-                           url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')`,
-        }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat admin-clients-bg"
       ></div>
 
       {/* Navigation */}
@@ -183,12 +179,7 @@ export default function AdminClients() {
           <img
             src="https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fdc36ab3d288a4806bc52f5b6be2d1ad4?format=webp&width=800"
             alt="SaintSal Logo"
-            className="w-12 h-12 object-contain"
-            style={{
-              filter:
-                "brightness(1.3) contrast(1.2) drop-shadow(0 0 12px rgba(255, 215, 0, 0.4))",
-              opacity: "0.95",
-            }}
+            className="w-12 h-12 object-contain saintsal-logo"
           />
           <div>
             <h1 className="text-xl font-bold saintvision-gradient-text">
@@ -304,6 +295,7 @@ export default function AdminClients() {
                   <div className="flex items-center space-x-2">
                     <Filter className="w-5 h-5 text-white/70" />
                     <select
+                      aria-label="Filter clients by status"
                       value={filterStatus}
                       onChange={e => setFilterStatus(e.target.value)}
                       className="bg-white/5 border border-white/20 text-white rounded-lg px-3 py-2 focus:border-gold-500"

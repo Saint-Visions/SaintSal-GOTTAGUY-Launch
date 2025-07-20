@@ -287,6 +287,7 @@ export default function Pricing() {
                 Monthly
               </span>
               <button
+                aria-label="Toggle billing cycle"
                 onClick={() =>
                   setBillingCycle(
                     billingCycle === "monthly" ? "yearly" : "monthly",
