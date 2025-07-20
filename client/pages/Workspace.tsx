@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "./Workspace.module.css";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -206,26 +207,11 @@ export default function Workspace() {
 
   return (
     <div className="min-h-screen bg-charcoal-900 text-white relative overflow-hidden">
-      {/* Background Pattern - BEAUTIFUL GOLD CIRCUIT PATTERN */}
-      <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at 25px 25px, rgb(255, 215, 0) 2px, transparent 2px),
-            radial-gradient(circle at 75px 75px, rgb(255, 215, 0) 2px, transparent 2px)
-          `,
-          backgroundSize: "100px 100px, 100px 100px",
-          backgroundPosition: "0px 0px, 50px 50px",
-        }}
-      />
+      <div className="absolute inset-0 opacity-5 workspace-bg-pattern" />
 
       {/* Parallax Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `linear-gradient(135deg, rgba(16, 22, 28, 0.98) 0%, rgba(16, 22, 28, 0.95) 100%), 
-                           url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')`,
-        }}
+        className={`absolute inset-0 bg-cover bg-center bg-no-repeat workspace-bg-image`}
       ></div>
 
       {/* Centered Logo - PERFECT OPACITY 0.1 WATERMARK */}
@@ -234,12 +220,7 @@ export default function Workspace() {
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2F1cdc62aca2204f40a3e1d2eb0ae10565"
           alt="Center Logo"
-          className="w-full max-w-md h-auto object-cover opacity-10"
-          style={{
-            aspectRatio: "1",
-            objectFit: "cover",
-            objectPosition: "center",
-          }}
+          className="w-full max-w-md h-auto workspace-center-logo"
         />
       </div>
 
@@ -249,13 +230,11 @@ export default function Workspace() {
           <img
             src={brandConfig.logo}
             alt={`${brandConfig.name} Logo`}
-            className="w-10 h-10 md:w-12 md:h-12 object-contain"
-            style={{
-              filter: isPartnerTechWorkspace
-                ? "brightness(1.3) contrast(1.2) drop-shadow(0 0 12px rgba(59, 130, 246, 0.4))"
-                : "brightness(1.3) contrast(1.2) drop-shadow(0 0 12px rgba(255, 215, 0, 0.4))",
-              opacity: "0.95",
-            }}
+            className={`w-10 h-10 md:w-12 md:h-12 object-contain ${
+              isPartnerTechWorkspace
+                ? styles.partnerTechLogo
+                : styles.saintVisionLogo
+            }`}
             onError={e => {
               e.currentTarget.src = `https://api.dicebear.com/7.x/initials/svg?seed=${
                 brandConfig.name
