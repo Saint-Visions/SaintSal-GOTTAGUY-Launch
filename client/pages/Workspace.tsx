@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Workspace.module.css";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -37,45 +36,10 @@ export default function Workspace() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [workspaceName] = useState("Acme Corp Workspace");
   const [activeTab, setActiveTab] = useState("overview");
-  const [userPlan, setUserPlan] = useState("enterprise"); // This would come from auth context
-  const [hasCRMAccess, setHasCRMAccess] = useState(true); // This would be determined from plan features
 
   useEffect(() => {
     setIsLoaded(true);
-    // In real implementation, fetch user plan and features
-    // fetchUserPlanAndFeatures();
   }, []);
-
-  // Determine if we should show PartnerTech branding
-  const isPartnerTechWorkspace = userPlan !== "free" && hasCRMAccess;
-
-  const getBrandConfig = () => {
-    if (isPartnerTechWorkspace) {
-      return {
-        name: "PartnerTech.ai",
-        logo:
-          "https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fpartnertech-logo",
-        tagline: "CRM + Automation Suite",
-        primaryColor: "#3B82F6", // Blue
-        accentColor: "#10B981", // Green
-        gradient: "bg-gradient-to-r from-blue-500 to-emerald-500",
-        textGradient:
-          "bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent",
-      };
-    }
-    return {
-      name: "SaintVision AI",
-      logo:
-        "https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fdc36ab3d288a4806bc52f5b6be2d1ad4",
-      tagline: "AI Platform",
-      primaryColor: "#FFD700", // Gold
-      accentColor: "#4F46E5", // Purple
-      gradient: "saintvision-gradient-text",
-      textGradient: "saintvision-gradient-text",
-    };
-  };
-
-  const brandConfig = getBrandConfig();
 
   const workspaceStats = [
     {
@@ -207,67 +171,42 @@ export default function Workspace() {
 
   return (
     <div className="min-h-screen bg-charcoal-900 text-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5 workspace-bg-pattern" />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 circuit-pattern opacity-5"></div>
 
       {/* Parallax Background */}
       <div
-        className={`absolute inset-0 bg-cover bg-center bg-no-repeat workspace-bg-image`}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(135deg, rgba(16, 22, 28, 0.98) 0%, rgba(16, 22, 28, 0.95) 100%), 
+                           url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')`,
+        }}
       ></div>
 
-      {/* Centered Logo - PERFECT OPACITY 0.1 WATERMARK */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2F1cdc62aca2204f40a3e1d2eb0ae10565"
-          alt="Center Logo"
-          className="w-full max-w-md h-auto workspace-center-logo"
-        />
-      </div>
-
-      {/* Mobile-First Navigation - PARTNERTECH.AI BRANDING */}
+      {/* Mobile-First Navigation */}
       <nav className="relative z-50 flex items-center justify-between p-4 md:p-6 lg:px-12 border-b border-white/10">
         <div className="flex items-center space-x-3 md:space-x-4">
           <img
-            src={brandConfig.logo}
-            alt={`${brandConfig.name} Logo`}
-            className={`w-10 h-10 md:w-12 md:h-12 object-contain ${
-              isPartnerTechWorkspace
-                ? styles.partnerTechLogo
-                : styles.saintVisionLogo
-            }`}
-            onError={e => {
-              e.currentTarget.src = `https://api.dicebear.com/7.x/initials/svg?seed=${
-                brandConfig.name
-              }&backgroundColor=${
-                isPartnerTechWorkspace ? "3B82F6" : "FFD700"
-              }`;
+            src="https://cdn.builder.io/api/v1/image/assets%2F065997bd13e4442e888a08652fcd61ba%2Fdc36ab3d288a4806bc52f5b6be2d1ad4?format=webp&width=800"
+            alt="SaintSal Logo"
+            className="w-10 h-10 md:w-12 md:h-12 object-contain"
+            style={{
+              filter:
+                "brightness(1.3) contrast(1.2) drop-shadow(0 0 12px rgba(255, 215, 0, 0.4))",
+              opacity: "0.95",
             }}
           />
           <div>
-            <h1
-              className={`text-lg md:text-xl font-bold ${brandConfig.textGradient}`}
-            >
+            <h1 className="text-lg md:text-xl font-bold saintvision-gradient-text">
               {workspaceName}
             </h1>
-            <p
-              className={`text-xs -mt-1 hidden sm:block ${
-                isPartnerTechWorkspace ? "text-blue-300" : "text-gold-300"
-              }`}
-            >
-              {brandConfig.tagline} Workspace
+            <p className="text-xs text-gold-300 -mt-1 hidden sm:block">
+              Team Workspace
             </p>
           </div>
         </div>
 
         <div className="flex items-center space-x-2 md:space-x-4">
-          {/* CRM PRO BADGE - BEAUTIFUL BLUE */}
-          {isPartnerTechWorkspace && (
-            <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs md:text-sm">
-              <Users className="w-3 h-3 mr-1" />
-              <span className="hidden sm:inline">CRM Pro</span>
-            </Badge>
-          )}
-          {/* ENTERPRISE BADGE - BEAUTIFUL GREEN */}
           <Badge className="bg-green-500/20 text-green-300 border-green-500/30 text-xs md:text-sm">
             <Crown className="w-3 h-3 mr-1" />
             <span className="hidden sm:inline">Enterprise</span>
@@ -275,11 +214,7 @@ export default function Workspace() {
           <Button
             variant="outline"
             size="sm"
-            className={`px-2 md:px-4 ${
-              isPartnerTechWorkspace
-                ? "border-blue-400/60 text-blue-200 hover:bg-blue-500/20 hover:text-blue-100"
-                : "border-gold-400/60 text-gold-200 hover:bg-gold-500/20 hover:text-gold-100"
-            }`}
+            className="border-white/20 text-white hover:bg-white/10 px-2 md:px-4"
           >
             <UserPlus className="w-4 h-4 md:mr-2" />
             <span className="hidden md:inline">Invite</span>
@@ -289,7 +224,7 @@ export default function Workspace() {
 
       <div className="relative z-40 px-4 md:px-6 py-6 md:py-8">
         <div className="max-w-7xl mx-auto">
-          {/* Mobile-First Header - BEAUTIFUL BLUE GRADIENTS */}
+          {/* Mobile-First Header */}
           <div
             className={`mb-6 md:mb-8 transform transition-all duration-1000 ${
               isLoaded
@@ -298,28 +233,13 @@ export default function Workspace() {
             }`}
           >
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4 tracking-tight">
-              <span
-                className={
-                  isPartnerTechWorkspace
-                    ? "bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent"
-                    : "saintvision-gradient-text"
-                }
-              >
-                Team
-              </span>
+              <span className="saintvision-gradient-text">Team</span>
               <br />
-              <span
-                className={
-                  isPartnerTechWorkspace ? "text-blue-300" : "text-green-300"
-                }
-              >
-                Workspace
-              </span>
+              <span className="text-green-300">Workspace</span>
             </h1>
             <p className="text-lg md:text-xl text-white/80 max-w-3xl">
-              {isPartnerTechWorkspace
-                ? "Manage your team's CRM automation and AI agents with PartnerTech.ai's collaborative features, sales analytics, and enterprise controls."
-                : "Manage your team's SaintSal™ AI workspace with collaborative features, usage analytics, and enterprise controls."}
+              Manage your team's SaintSal™ AI workspace with collaborative
+              features, usage analytics, and enterprise controls.
             </p>
           </div>
 
@@ -537,14 +457,14 @@ export default function Workspace() {
                       </Button>
                       <Button
                         variant="outline"
-                        className="w-full justify-start border-gold-400/60 text-gold-200 hover:bg-gold-500/20 hover:text-gold-100 h-10 md:h-12"
+                        className="w-full justify-start border-white/20 text-white hover:bg-white/10 h-10 md:h-12"
                       >
                         <Download className="w-4 h-4 mr-2" />
                         Export Data
                       </Button>
                       <Button
                         variant="outline"
-                        className="w-full justify-start border-gold-400/60 text-gold-200 hover:bg-gold-500/20 hover:text-gold-100 h-10 md:h-12"
+                        className="w-full justify-start border-white/20 text-white hover:bg-white/10 h-10 md:h-12"
                       >
                         <Settings className="w-4 h-4 mr-2" />
                         Workspace Settings
@@ -572,6 +492,84 @@ export default function Workspace() {
                       Upgrade Plan
                     </Button>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === "members" && (
+              <div className="glass-morphism rounded-xl overflow-hidden">
+                <div className="p-4 md:p-6 border-b border-white/10">
+                  <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+                    <h3 className="text-lg md:text-xl font-bold">
+                      Team Members ({teamMembers.length})
+                    </h3>
+                    <div className="flex items-center space-x-2 w-full md:w-auto">
+                      <div className="relative flex-1 md:flex-none md:w-64">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/40" />
+                        <Input
+                          placeholder="Search members..."
+                          className="bg-white/5 border-white/20 text-white placeholder:text-white/50 focus:border-gold-500 pl-10 h-9"
+                        />
+                      </div>
+                      <Button
+                        size="sm"
+                        className="bg-green-500 text-white hover:bg-green-400 saintvision-glow h-9"
+                      >
+                        <UserPlus className="w-4 h-4 mr-2" />
+                        Invite
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="divide-y divide-white/10">
+                  {teamMembers.map((member, index) => (
+                    <div
+                      key={index}
+                      className="p-4 hover:bg-white/5 transition-colors"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Avatar className="w-10 h-10">
+                            <AvatarFallback className="bg-gold-500 text-charcoal-900 font-bold">
+                              {member.name
+                                .split(" ")
+                                .map(n => n[0])
+                                .join("")}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-medium">{member.name}</p>
+                            <p className="text-white/60 text-sm">
+                              {member.email}
+                            </p>
+                            <p className="text-white/50 text-xs">
+                              Last active: {member.lastActive}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2 text-right">
+                          <div className="hidden md:block">
+                            <p className="text-white/80 text-sm">
+                              {member.usage}
+                            </p>
+                          </div>
+                          <Badge className={getRoleColor(member.role)}>
+                            {member.role}
+                          </Badge>
+                          <Badge className={getStatusColor(member.status)}>
+                            {member.status}
+                          </Badge>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-white/70 hover:text-white"
+                          >
+                            <MoreVertical className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
